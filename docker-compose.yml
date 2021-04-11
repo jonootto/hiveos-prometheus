@@ -7,9 +7,9 @@ services:
     restart: unless-stopped
     environment:
       TZ: Pacific/Auckland
-      INFLUX_IP: "192.168.1.254"
-      INFLUX_PORT: "8086"
-      INFLUX_USER: "hive"
+      INFLUX_IP: $INFLUX_IP
+      INFLUX_PORT: $INFLUX_PORT
+      INFLUX_USER: $INFLUX_USER
       INFLUX_PASS: $INFLUX_PASS
       RIG_NAME: ""
     security_opt:
