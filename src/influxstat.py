@@ -6,6 +6,7 @@ from influxdb import InfluxDBClient
 import requests
 from datetime import datetime, timedelta
 from time import sleep
+import os
 
 print("Get Stats")
 
@@ -189,13 +190,19 @@ def main():
         sleep(timetowait())
 
 
-with open("./settings.json") as json_data_file:
-    settings = json.load(json_data_file)
-    influxip = settings['influx-settings']['host']
-    influxport = settings['influx-settings']['port']
-    influxuser = settings['influx-settings']['username']
-    influspass = settings['influx-settings']['password']
-    rig = settings['influx-settings']['rig']
+# with open("./settings.json") as json_data_file:
+#     settings = json.load(json_data_file)
+#     influxip = settings['influx-settings']['host']
+#     influxport = settings['influx-settings']['port']
+#     influxuser = settings['influx-settings']['username']
+#     influspass = settings['influx-settings']['password']
+#     rig = settings['influx-settings']['rig']
+influxip = os.environ['INFLUX_IP']
+influxport = os.environ['INFLUX_PORT']
+influxuser = os.environ['INFLUX_USER']
+influspass = os.environ['INFLUX_PASS']
+rig = os.environ['RIG_NAME']
+
 requests.packages.urllib3.disable_warnings()
 client = InfluxDBClient(host=influxip, port=influxport, username=influxuser, password=influspass,ssl=True,verify_ssl=False)
 

@@ -6,7 +6,11 @@ services:
     container_name: hivestat
     restart: unless-stopped
     environment:
-      TZ: "Pacific/Auckland"
+      - TZ: "Pacific/Auckland"
+      - INFLUX_IP: "192.168.1.254"
+      - INFLUX_PORT: "8086"
+      - INFLUX_USER: "admin"
+      - INFLUX_PASS: $INFLUX_PASS
     security_opt:
       - seccomp:unconfined
     volumes:
