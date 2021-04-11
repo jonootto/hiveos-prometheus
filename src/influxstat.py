@@ -198,10 +198,15 @@ def main():
 #     influspass = settings['influx-settings']['password']
 #     rig = settings['influx-settings']['rig']
 influxip = os.environ['INFLUX_IP']
+print(influxip)
 influxport = os.environ['INFLUX_PORT']
+print(influxport)
 influxuser = os.environ['INFLUX_USER']
+print(influxuser)
 influspass = os.environ['INFLUX_PASS']
+print(influxpass)
 rig = os.environ['RIG_NAME']
+print(rig)
 
 requests.packages.urllib3.disable_warnings()
 client = InfluxDBClient(host=influxip, port=influxport, username=influxuser, password=influspass,ssl=True,verify_ssl=False)
