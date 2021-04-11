@@ -11,7 +11,7 @@ services:
       INFLUX_PORT: $INFLUX_PORT
       INFLUX_USER: $INFLUX_USER
       INFLUX_PASS: $INFLUX_PASS
-      RIG_NAME: ""
+      RIG_NAME: $RIG_NAME
     security_opt:
       - seccomp:unconfined
     volumes:
