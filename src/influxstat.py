@@ -203,13 +203,13 @@ influxport = os.environ['INFLUX_PORT']
 print(influxport)
 influxuser = os.environ['INFLUX_USER']
 print(influxuser)
-influspass = os.environ['INFLUX_PASS']
+influxpass = os.environ['INFLUX_PASS']
 print(influxpass)
 rig = os.environ['RIG_NAME']
 print(rig)
 
 requests.packages.urllib3.disable_warnings()
-client = InfluxDBClient(host=influxip, port=influxport, username=influxuser, password=influspass,ssl=True,verify_ssl=False)
+client = InfluxDBClient(host=influxip, port=influxport, username=influxuser, password=influxpass,ssl=True,verify_ssl=False)
 
 setdb()
 main()
