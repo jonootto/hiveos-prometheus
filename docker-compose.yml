@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  hivestat:
+    build: .
+    image: hivestat
+    container_name: hivestat
+    restart: unless-stopped
+    environment:
+      TZ: "Pacific/Auckland"
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - /run/hive/last_stat.json:/run/hive/last_stat.json:ro
