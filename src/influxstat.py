@@ -199,7 +199,7 @@ def main():
 #     rig = settings['influx-settings']['rig']
 influxip = os.environ['INFLUX_IP']
 print(influxip)
-influxport = os.environ['INFLUX_PORT']
+influxport = int(os.environ['INFLUX_PORT'])
 print(influxport)
 influxuser = os.environ['INFLUX_USER']
 print(influxuser)
