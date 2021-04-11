@@ -2,7 +2,7 @@ version: "3.9"
 services:
   hivestat:
     build: .
-    image: hivestat
+    image: jonootto/hiveos-influx:latest
     container_name: hivestat
     restart: unless-stopped
     environment:
