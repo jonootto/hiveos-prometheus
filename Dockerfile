@@ -1,5 +1,5 @@
 # set base image (host OS)
-FROM python:3
+FROM python:3-alpine
 
 # set the working directory in the container
 WORKDIR /code
