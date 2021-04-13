@@ -33,6 +33,7 @@ def toinflux(input):
 
 def hashrate(rates,total):
     print(str(len(rates)) + " CARDS")
+    json_body_rates = ""
     for x in range(len(rates)):
         json_body_rates = json_body_rates + [
         {
