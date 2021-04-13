@@ -48,6 +48,7 @@ def hashrate(rates,total):
             }
         },
         ]
+        print(type(json_body_rates))
     json_body_total = [
     {
         "measurement": "hashrate",
