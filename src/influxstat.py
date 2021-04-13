@@ -60,6 +60,7 @@ def hashrate(rates,total):
     }
     ]
     json_body = json_body_rates + json_body_total
+    print(json_body)
     toinflux(json_body)
 
 
