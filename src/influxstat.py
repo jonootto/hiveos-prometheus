@@ -106,12 +106,10 @@ def main():
             hash = (stats["params"]["miner_stats"]["hs"])
             print(hash)
             ctemps = (stats["params"]["temp"])
-            for line in stats:
-                print(line)
-                try:
-                    mtemps = (stats["params"]["mtemp"])
-                except:
-                    mtemps = [0] * len(hash)
+            try:
+                mtemps = (stats["params"]["mtemp"])
+            except:
+                mtemps = [0] * len(hash)
             power = (stats["params"]["power"])
             fan = (stats["params"]["fan"])
             totalhash = (int((stats["params"]["total_khs"]))*1000)
