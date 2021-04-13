@@ -108,9 +108,12 @@ def main():
             ctemps = (stats["params"]["temp"])
             try:
                 mtemps = (stats["params"]["mtemp"])
+                print(mtemps)
             except:
-                print(len(ctemps))
-                mtemps = 0
+                print(len(mtemps))
+                cardqty = len(mtemps)
+                mtemps =  cardqty*['0',]
+                print(mtemps)
             power = (stats["params"]["power"])
             fan = (stats["params"]["fan"])
             totalhash = (int((stats["params"]["total_khs"]))*1000)
