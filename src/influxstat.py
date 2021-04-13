@@ -110,7 +110,7 @@ def main():
                 mtemps = (stats["params"]["mtemp"])
                 print(mtemps)
             except:
-                for x in range(len(mtemps)):
+                for x in range(len(hash)):
                     mtemps[x] = 0
                 print(mtemps)
             power = (stats["params"]["power"])
