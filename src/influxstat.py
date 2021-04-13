@@ -32,104 +32,21 @@ def toinflux(input):
     client.write_points(input,time_precision='s')
 
 def hashrate(rates,total):
-    g0 = rates[0]
-    g1 = rates[1]
-    g2 = rates[2]
-    g3 = rates[3]
-    g4 = rates[4]
-    g5 = rates[5]
-    g6 = rates[6]
-    g7 = rates[7]
-
-    json_body = [
-    {
-        "measurement": "hashrate",
-        "tags": {
-            "miner" :rig,
-            "gpu" : 0
+    for x in range(len(rates)):
+        json_body_rates = [
+        {
+           "measurement": "hashrate",
+            "tags": {
+                "miner" :rig,
+                "gpu" : 0
+            },
+            "time": time_string(),
+            "fields": {
+                "Hashrate": rates[x]
+            }
         },
-        "time": time_string(),
-        "fields": {
-            "Hashrate": g0
-        }
-    },
-    {
-        "measurement": "hashrate",
-        "tags": {
-            "miner" :rig,
-            "gpu" : 1
-        },
-        "time": time_string(),
-        "fields": {
-            "Hashrate": g1
-        }
-    },
-    {
-        "measurement": "hashrate",
-        "tags": {
-            "miner" :rig,
-            "gpu" : 2
-        },
-        "time": time_string(),
-        "fields": {
-            "Hashrate": g2
-        }
-    },
-    {
-        "measurement": "hashrate",
-        "tags": {
-            "miner" :rig,
-            "gpu" : 3
-        },
-        "time": time_string(),
-        "fields": {
-            "Hashrate": g3
-        }
-    },
-    {
-        "measurement": "hashrate",
-        "tags": {
-            "miner" :rig,
-            "gpu" : 4
-        },
-        "time": time_string(),
-        "fields": {
-            "Hashrate": g4
-        }
-    },
-    {
-        "measurement": "hashrate",
-        "tags": {
-            "miner" :rig,
-            "gpu" : 5
-        },
-        "time": time_string(),
-        "fields": {
-            "Hashrate": g5
-        }
-    },
-    {
-        "measurement": "hashrate",
-        "tags": {
-            "miner" :rig,
-            "gpu" : 6
-        },
-        "time": time_string(),
-        "fields": {
-            "Hashrate": g6
-        }
-    },
-    {
-        "measurement": "hashrate",
-        "tags": {
-            "miner" :rig,
-            "gpu" : 7
-        },
-        "time": time_string(),
-        "fields": {
-            "Hashrate": g7
-        }
-    },
+        ]
+    json_body_total = [
     {
         "measurement": "hashrate",
         "tags": {
@@ -142,6 +59,7 @@ def hashrate(rates,total):
         }
     }
     ]
+    json_body = json_body_rates + json_body_total
     toinflux(json_body)
 
 
