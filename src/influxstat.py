@@ -108,9 +108,9 @@ def main():
             ctemps = (stats["params"]["temp"])
 
             for line in stats:
-                j = json.loads(line)
+                print(line)
                 try:
-                    if 'mtemp' in j:
+                    if 'mtemp' in line:
                         mtemps = (stats["params"]["mtemp"])
                     else:
                             mtemps = 0
