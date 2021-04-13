@@ -39,7 +39,7 @@ def hashrate(rates,total):
            "measurement": "hashrate",
             "tags": {
                 "miner" :rig,
-                "gpu" : 0
+                "gpu" : x
             },
             "time": time_string(),
             "fields": {
