@@ -110,9 +110,8 @@ def main():
                 mtemps = (stats["params"]["mtemp"])
                 print(mtemps)
             except:
-                print(len(mtemps))
-                cardqty = len(mtemps)
-                mtemps =  cardqty*['0',]
+                for x in range(len(mtemps)):
+                    mtemps[x] = 0
                 print(mtemps)
             power = (stats["params"]["power"])
             fan = (stats["params"]["fan"])
