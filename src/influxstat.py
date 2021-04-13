@@ -34,7 +34,7 @@ def toinflux(input):
 def hashrate(rates,total):
     print(str(len(rates)) + " CARDS")
     for x in range(len(rates)):
-        json_body_rates = [
+        json_body_rates = json_body_rates + [
         {
            "measurement": "hashrate",
             "tags": {
