@@ -47,6 +47,7 @@ def hashrate(rates,total):
             }
         },
         ]
+        json_out = json_out + json_body_rates
         print(type(json_body_rates))
     json_body_total = [
     {
@@ -61,7 +62,7 @@ def hashrate(rates,total):
         }
     }
     ]
-    json_body = json_body_rates + json_body_total
+    json_body = json_out + json_body_total
     print(json_body)
     toinflux(json_body)
 
