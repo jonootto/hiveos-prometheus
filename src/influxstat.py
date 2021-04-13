@@ -47,7 +47,11 @@ def hashrate(rates,total):
             }
         },
         ]
-        json_out = json_out + json_body_rates
+        if x == 0:
+            json_out = json_body_rates
+        else:
+            json_out = json_out + json_body_rates
+
         print(type(json_body_rates))
     json_body_total = [
     {
