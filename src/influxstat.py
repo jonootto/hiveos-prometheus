@@ -104,8 +104,13 @@ def main():
         with open("/run/hive/last_stat.json") as json_data_file:
             stats = json.load(json_data_file)
             hash = (stats["params"]["miner_stats"]["hs"])
+            print(hash)
             ctemps = (stats["params"]["temp"])
-            mtemps = (stats["params"]["mtemp"])
+            try:
+                mtemps = (stats["params"]["mtemp"])
+            except:
+                print(len(ctemps))
+                mtemps = 0
             power = (stats["params"]["power"])
             fan = (stats["params"]["fan"])
             totalhash = (int((stats["params"]["total_khs"]))*1000)
