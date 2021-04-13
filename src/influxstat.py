@@ -106,7 +106,7 @@ def main():
             hash = (stats["params"]["miner_stats"]["hs"])
             print(hash)
             ctemps = (stats["params"]["temp"])
-
+            mtemps = [0] * len(hash)
             for line in stats:
                 print(line)
                 try:
