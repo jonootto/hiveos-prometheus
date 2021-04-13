@@ -107,7 +107,7 @@ def main():
             print(hash)
             ctemps = (stats["params"]["temp"])
 
-            for line in json_data_file:
+            for line in stats:
                 j = json.loads(line)
                 try:
                     if 'mtemp' in j:
