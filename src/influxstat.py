@@ -106,16 +106,13 @@ def main():
             hash = (stats["params"]["miner_stats"]["hs"])
             print(hash)
             ctemps = (stats["params"]["temp"])
-            mtemps = [0] * len(hash)
             for line in stats:
                 print(line)
                 try:
                     if 'mtemp' in line:
                         mtemps = (stats["params"]["mtemp"])
                     else:
-                            mtemps = 0
-                            for x in range(len(hash)):
-                                mtemps[x] = 0
+                        mtemps = [0] * len(hash)
                 except:
                     print("EXCEPTION: ", j)
             power = (stats["params"]["power"])
