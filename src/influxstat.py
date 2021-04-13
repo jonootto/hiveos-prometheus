@@ -80,7 +80,7 @@ def timetowait():
     print("    " + str(wait_seconds)+"s until next")
     return(wait_seconds)
 
-def cardstats(ctemps,power,fan):
+def cardstats(ctemps,mtemps,power,fan):
     for x in range(len(ctemps)):
         json_body = [
         {
@@ -92,6 +92,7 @@ def cardstats(ctemps,power,fan):
             "time": time_string(),
             "fields": {
                 "Core Temperature": ctemps[x],
+                "Memory Temperature": mtemps[x],
                 "Power": power[x],
                 "Fan": fan[x]
             }
@@ -106,12 +107,12 @@ def main():
             stats = json.load(json_data_file)
             hash = (stats["params"]["miner_stats"]["hs"])
             ctemps = (stats["params"]["temp"])
-            #mtemps = (stats["params"]["mtemp"])
+            mtemps = (stats["params"]["mtemp"])
             power = (stats["params"]["power"])
             fan = (stats["params"]["fan"])
             totalhash = (int((stats["params"]["total_khs"]))*1000)
         hashrate(hash,totalhash)
-        cardstats(ctemps,power,fan)
+        cardstats(ctemps,mtemps,power,fan)
         sleep(timetowait())
 
 
