@@ -116,7 +116,7 @@ def main():
             power = (stats["params"]["power"])
             fan = (stats["params"]["fan"])
             totalhash = (int((stats["params"]["total_khs"]))*1000)
-            print("memory" + str(mtemps)
+            print("memory" + str(mtemps))
         hashrate(hash,totalhash)
         cardstats(ctemps,mtemps,power,fan)
         sleep(timetowait())
