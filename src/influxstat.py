@@ -109,12 +109,9 @@ def main():
             for line in stats:
                 print(line)
                 try:
-                    if 'mtemp' in line:
-                        mtemps = (stats["params"]["mtemp"])
-                    else:
-                        mtemps = [0] * len(hash)
+                    mtemps = (stats["params"]["mtemp"])
                 except:
-                    print("EXCEPTION: ", j)
+                    mtemps = [0] * len(hash)
             power = (stats["params"]["power"])
             fan = (stats["params"]["fan"])
             totalhash = (int((stats["params"]["total_khs"]))*1000)
