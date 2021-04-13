@@ -106,13 +106,18 @@ def main():
             hash = (stats["params"]["miner_stats"]["hs"])
             print(hash)
             ctemps = (stats["params"]["temp"])
-            try:
-                mtemps = (stats["params"]["mtemp"])
-            except:
-                mtemps = 0
-                for x in range(len(hash)):
-                    mtemps[x] = 0
 
+            for line in json_data_file:
+                j = json.loads(line)
+                try:
+                    if 'mtemp' in j:
+                        mtemps = (stats["params"]["mtemp"])
+                    else:
+                            mtemps = 0
+                            for x in range(len(hash)):
+                                mtemps[x] = 0
+                except:
+                    print("EXCEPTION: ", j)
             power = (stats["params"]["power"])
             fan = (stats["params"]["fan"])
             totalhash = (int((stats["params"]["total_khs"]))*1000)
