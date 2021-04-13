@@ -108,15 +108,15 @@ def main():
             ctemps = (stats["params"]["temp"])
             try:
                 mtemps = (stats["params"]["mtemp"])
-                print(mtemps)
             except:
                 mtemps = 0
                 for x in range(len(hash)):
                     mtemps[x] = 0
-                print(mtemps)
+
             power = (stats["params"]["power"])
             fan = (stats["params"]["fan"])
             totalhash = (int((stats["params"]["total_khs"]))*1000)
+            print("memory" + str(mtemps)
         hashrate(hash,totalhash)
         cardstats(ctemps,mtemps,power,fan)
         sleep(timetowait())
