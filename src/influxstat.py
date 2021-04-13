@@ -32,7 +32,7 @@ def toinflux(input):
     client.write_points(input,time_precision='s')
 
 def hashrate(rates,total):
-    print(str(len(rates)) + " CARDS")
+    #print(str(len(rates)) + " CARDS")
     for x in range(len(rates)):
         json_body_rates = [
         {
