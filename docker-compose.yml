@@ -15,4 +15,4 @@ services:
     security_opt:
       - seccomp:unconfined
     volumes:
-      - /run/hive/last_stat.json:/run/hive/last_stat.json
+      - /run/hive/:/run/hive/:ro
