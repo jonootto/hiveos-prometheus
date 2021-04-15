@@ -3,7 +3,7 @@
 
 import json
 from influxdb import InfluxDBClient
-import requests
+from requests import packages
 from datetime import datetime, timedelta
 from time import sleep
 import os
@@ -133,7 +133,7 @@ influxpass = os.environ['INFLUX_PASS']
 rig = os.environ['RIG_NAME']
 print(rig)
 
-requests.packages.urllib3.disable_warnings()
+packages.urllib3.disable_warnings()
 client = InfluxDBClient(host=influxip, port=influxport, username=influxuser, password=influxpass,ssl=True,verify_ssl=False)
 
 setdb()
