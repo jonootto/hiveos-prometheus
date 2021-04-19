@@ -75,7 +75,7 @@ def timetowait():
     next_minute = (now + delta).replace(microsecond=0,second=30)
     wait_seconds = (next_minute - now)
     wait_seconds = int((wait_seconds).total_seconds())
-    print("    " + str(wait_seconds)+"s until next")
+    print("    " + time_string() + "   " + str(wait_seconds)+"s until next")
     return(wait_seconds)
 
 def cardstats(ctemps,mtemps,power,fan):
