@@ -12,3 +12,5 @@ services:
       - seccomp:unconfined
     volumes:
       - /run/hive/:/run/hive/:ro
+    ports:
+      - 7890:7890/tcp
