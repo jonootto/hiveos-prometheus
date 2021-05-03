@@ -2,71 +2,24 @@
 #pip3 install -r requirements.txt
 
 import json
-from influxdb import InfluxDBClient
-from requests import packages
 from datetime import datetime, timedelta
 from time import sleep
 import os
+from prometheus_client import Gauge, start_http_server
 
 print("Get Stats")
 
-def setdb():
-    dbname = 'hive'
-    makedb = True
-    dbs = client.get_list_database()
-    for x in dbs:
-        if (x['name']) == dbname:
-            makedb = False
-
-    if makedb:
-        print('making the db')
-        client.create_database(dbname)
-    else:
-        client.switch_database(dbname)
 
 def time_string():
     current_time = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
     return current_time
 
-def toinflux(input):
-    client.write_points(input,time_precision='s')
 
 def hashrate(rates,total):
     #print(str(len(rates)) + " CARDS")
     for x in range(len(rates)):
-        json_body_rates = [
-        {
-           "measurement": "hashrate",
-            "tags": {
-                "miner" :rig,
-                "gpu" : x
-            },
-            "time": time_string(),
-            "fields": {
-                "Hashrate": rates[x]
-            }
-        },
-        ]
-        if x == 0:
-            json_out = json_body_rates
-        else:
-            json_out = json_out + json_body_rates
-
-    json_body_total = [
-    {
-        "measurement": "hashrate",
-        "tags": {
-            "miner" :rig,
-            "gpu" : "total"
-        },
-        "time": time_string(),
-        "fields": {
-            "Hashrate": total
-        }
-    }
-    ]
-    json_body = json_out + json_body_total
-    toinflux(json_body)
+        g['hashrate'].labels(rig=rig,card = x).set(rates[x])
+        g['hashrate'].labels(rig=rig,card = "total").set(total)
 
 
 def timetowait():
@@ -80,26 +33,16 @@ def timetowait():
 
 def cardstats(ctemps,mtemps,power,fan):
     for x in range(len(ctemps)):
-        json_body = [
-        {
-            "measurement": "Cards",
-            "tags": {
-                "miner" :rig,
-                "gpu" : str(x)
-            },
-            "time": time_string(),
-            "fields": {
-                "Core Temperature": ctemps[x],
-                "Memory Temperature": mtemps[x],
-                "Power": power[x],
-                "Fan": fan[x]
-            }
-        }
-        ]
-        toinflux(json_body)
+        
+        g['coretemp'].labels(rig=rig,card = x).set(ctemps[x])
+        g['memtemp'].labels(rig=rig,card = x).set(mtemps[x])
+        g['power'].labels(rig=rig,card = x).set(power[x])
+        g['fan'].labels(rig=rig,card = x).set(fan[x])
+
 
 def main():
     print("Main")
+    start_http_server(7890)
     while(True):
         with open("/run/hive/last_stat.json") as json_data_file:
             stats = json.load(json_data_file)
@@ -119,22 +62,17 @@ def main():
         sleep(timetowait())
 
 
-# with open("./settings.json") as json_data_file:
-#     settings = json.load(json_data_file)
-#     influxip = settings['influx-settings']['host']
-#     influxport = settings['influx-settings']['port']
-#     influxuser = settings['influx-settings']['username']
-#     influspass = settings['influx-settings']['password']
-#     rig = settings['influx-settings']['rig']
-influxip = os.environ['INFLUX_IP']
-influxport = os.environ['INFLUX_PORT']
-influxuser = os.environ['INFLUX_USER']
-influxpass = os.environ['INFLUX_PASS']
 rig = os.environ['RIG_NAME']
 print(rig)
 
-packages.urllib3.disable_warnings()
-client = InfluxDBClient(host=influxip, port=influxport, username=influxuser, password=influxpass,ssl=True,verify_ssl=False)
+g = {}
+g['hash'] = Gauge('hive_hashrate','Hashrate',['rig','card'])
+g['coretemp'] = Gauge('hive_coretemp','GPU Core Temp',['rig','card'])
+g['memtemp'] = Gauge('hive_memtemp','GPU Memory Temperature',['rig','card'])
+g['power'] = Gauge('hive_power','GPU Power Consumption',['rig','card'])
+g['fan'] = Gauge('hive_fan','GPU Fan Speed',['rig','card'])
 
-setdb()
+
+
+
 main()
