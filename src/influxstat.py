@@ -18,8 +18,8 @@ def time_string():
 def hashrate(rates,total):
     #print(str(len(rates)) + " CARDS")
     for x in range(len(rates)):
-        g['hashrate'].labels(rig=rig,card = x).set(rates[x])
-        g['hashrate'].labels(rig=rig,card = "total").set(total)
+        g['hash'].labels(rig=rig,card = x).set(rates[x])
+        g['hash'].labels(rig=rig,card = "total").set(total)
 
 
 def timetowait():
