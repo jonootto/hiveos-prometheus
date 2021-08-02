@@ -6,7 +6,7 @@ services:
     container_name: hivestat
     restart: unless-stopped
     environment:
-      TZ: Pacific/Auckland
+      TZ: $TZ
       RIG_NAME: $RIG_NAME
     security_opt:
       - seccomp:unconfined
