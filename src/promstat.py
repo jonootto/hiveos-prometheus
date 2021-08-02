@@ -18,7 +18,7 @@ def time_string():
 def hashrate(rates,total):
     #print(str(len(rates)) + " CARDS")
     for x in range(len(rates)):
-        g['hash'].labels(rig=rig,card = x).set(rates[x])
+        g['hash'].labels(rig=rig,card = x).set(rates[x]*1000)
         g['hash'].labels(rig=rig,card = "total").set(total)
 
 
@@ -46,7 +46,7 @@ def main():
     while(True):
         with open("/run/hive/last_stat.json") as json_data_file:
             stats = json.load(json_data_file)
-            hash = (stats["params"]["miner_stats"]["hs"])*1000
+            hash = (stats["params"]["miner_stats"]["hs"])
             
             ctemps = (stats["params"]["temp"])
             try:
