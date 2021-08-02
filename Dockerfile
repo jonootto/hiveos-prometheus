@@ -14,4 +14,4 @@ RUN pip install --upgrade -r requirements.txt
 COPY src/ .
 
 # command to run on container start
-CMD [ "python","-u","./influxstat.py" ] 
+CMD [ "python","-u","./promstat.py" ] 
