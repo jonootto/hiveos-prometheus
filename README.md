@@ -1,1 +1,1 @@
-Push stats from hiveos to influxdb
+Push stats from hiveos to prometheus
