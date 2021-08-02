@@ -46,7 +46,7 @@ def main():
     while(True):
         with open("/run/hive/last_stat.json") as json_data_file:
             stats = json.load(json_data_file)
-            hash = (stats["params"]["miner_stats"]["hs"]*1000)
+            hash = (stats["params"]["miner_stats"]["hs"])*1000
             
             ctemps = (stats["params"]["temp"])
             try:
