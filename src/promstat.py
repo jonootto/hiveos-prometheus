@@ -5,7 +5,7 @@ import json
 from datetime import datetime, timedelta
 from time import sleep
 import os
-from prometheus_client import Gauge, start_http_server
+from prometheus_client import Gauge,Info, start_http_server
 
 print("Get Stats")
 
@@ -52,11 +52,18 @@ def main():
             try:
                 mtemps = (stats["params"]["mtemp"])
             except:
-                mtemps = [0] * len(hash)
+                mtemps = [0] * (len(hash)+1)
             power = (stats["params"]["power"])
             fan = (stats["params"]["fan"])
             totalhash = (int((stats["params"]["total_khs"]))*1000)
+            miner = (stats["params"]["miner"])
+            miner_ver = (stats["params"]["miner_stats"]["ver"])
+            ars = (stats["params"]["miner_stats"]["ar"])
             
+        i.info({'MinerVersion': miner_ver , 'MinerType': miner})
+           
+        g['ratio'].labels(rig=rig,type = "accepted").set(ars[0])
+        g['ratio'].labels(rig=rig,type = "rejected").set(ars[1])
         hashrate(hash,totalhash)
         cardstats(ctemps,mtemps,power,fan)
         sleep(timetowait())
@@ -71,8 +78,9 @@ g['coretemp'] = Gauge('hive_coretemp','GPU Core Temp',['rig','card'])
 g['memtemp'] = Gauge('hive_memtemp','GPU Memory Temperature',['rig','card'])
 g['power'] = Gauge('hive_power','GPU Power Consumption',['rig','card'])
 g['fan'] = Gauge('hive_fan','GPU Fan Speed',['rig','card'])
+g['ratio'] = Gauge('hive_ratio','Acceptance ratio',['rig','type'])
 
-
-
+i = {}
+i = Info('minername', 'Current Miner')
 
 main()

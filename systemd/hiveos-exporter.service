@@ -1,0 +1,16 @@
+[Unit]
+Description=Hiveos-exporter
+After=network-online.target multi-user.target
+Requires=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+TimeoutStartSec=infinity
+Environment="RIG_NAME=Default"
+ExecStart=/usr/bin/python3  /root/hiveos-exporter/promstat.py
+Restart=always
+RestartSec=45
+
+[Install]
+WantedBy=multi-user.target
