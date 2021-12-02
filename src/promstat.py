@@ -43,8 +43,9 @@ def cardstats(ctemps,mtemps,power,fan):
 def main():
     print("Main")
     start_http_server(7890)
+    last_stat="/run/hive/last_stat.json"
     while(True):
-        with open("/run/hive/last_stat.json") as json_data_file:
+        with open(last_stat) as json_data_file:
             stats = json.load(json_data_file)
             hash = (stats["params"]["miner_stats"]["hs"])
             
@@ -56,7 +57,9 @@ def main():
             power = (stats["params"]["power"])
             fan = (stats["params"]["fan"])
             totalhash = (int((stats["params"]["total_khs"]))*1000)
-            
+
+        os.remove(last_stat)
+
         hashrate(hash,totalhash)
         cardstats(ctemps,mtemps,power,fan)
         sleep(timetowait())
